@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css?family=Droid+Sans+Mono');
+
+.flipUnitContainer {
+  display: block;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  perspective-origin: 50% 50%;
+  perspective: 300px;
+  background-color: white;
+  box-shadow: 0 10px 10px -10px grey;
+  border-radius: 20px;
+}
+
+.upperCard, .lowerCard {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  border: 1px solid whitesmoke;
+}
+
+.upperCard {
+  align-items: flex-end;
+  border-bottom: 0.5px solid whitesmoke;
+  border-radius: 20px 20px 0 0;
+}
+
+.upperCard span {
+  font-family: 'Droid Sans Mono', monospace;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.8);
+  transform: translateY(50%);
+  font-size: 4em;
+}
+
+.lowerCard {
+  align-items: flex-start;
+  border-top: 0.5px solid whitesmoke;
+  border-radius: 0 0 20px 20px;
+}
+
+.lowerCard span {
+  font-family: 'Droid Sans Mono', monospace;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-50%);
+  font-size: 4em;
+}
+
+.flipCard {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+
+.flipCard span {
+  font-family: 'Droid Sans Mono', monospace;
+  font-size: 4em;
+  font-weight: lighter;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.flipCard.unfold {
+  top: 50%;
+  align-items: flex-start;
+  transform-origin: 50% 0;
+  transform: rotateX(180deg);
+  background-color: white;
+  border: 0.5px solid whitesmoke;
+  border-radius: 0 0 20px 20px;
+}
+
+.flipCard.unfold span {
+  transform: translateY(-50%);
+}
+
+.flipCard.fold {
+  top: 0;
+  align-items: flex-end;
+  transform-origin: 50% 100%;
+  transform: rotateX(0deg);
+  background-color: white;
+  border: 0.5px solid whitesmoke;
+  border-radius: 20px 20px 0 0;
+}
+
+.flipCard.fold span {
+  transform: translateY(50%);
+}
+
+.fold {
+  animation: fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+.unfold {
+  animation: unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) forwards;
+  transform-style: preserve-3d;
+}
+
+@keyframes fold {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(-180deg);
+  }
+}
+
+@keyframes unfold {
+  0% {
+    transform: rotateX(180deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+@media screen and (max-width: 610px) {
+  .flipCard span, .lowerCard span, .upperCard span {
+    font-size: 2.5em;
+  }
+
+  .flipUnitContainer {
+    width: 75px;
+    height: 100px;
+  }
+}
