@@ -1,12 +1,23 @@
 import CountTime from "./CountTime.tsx"
 import InputTime from "./InputTime.tsx"
+import {useDisclosure} from "@mantine/hooks";
+import ModalConfirmDate from "../../components/Modals/ModalConfirmDate.tsx";
+import {useState} from "react";
+import {Date} from '../../types/commonTypes.ts'
 
 function Home() {
 
+    const [opened, {open, close}] = useDisclosure(false)
+    const [date, setDate] = useState<Date>({
+        display: '',
+        format: ''
+    })
+
     return (
         <>
-            <InputTime/>
+            <InputTime open={open} date={date} setDate={setDate} />
             <CountTime/>
+            <ModalConfirmDate opened={opened} close={close} date={date.display}/>
         </>
     )
 }
